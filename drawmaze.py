@@ -95,6 +95,13 @@ def on_draw():
             draw_block(x, z)
 
 
+mz = set()
+
+for x, z, block in itercells():
+    if block == '1':
+        mz.add((x, z))
+
+
 def on_key_press(symbol, modifiers):
     global tang, pos
     if symbol == key.LEFT:
@@ -106,7 +113,9 @@ def on_key_press(symbol, modifiers):
     elif symbol == key.UP:
         x, y, z = pos
         dx, dy, dz = get_dir()
-        pos = x + dx, y + dy, z + dz
+        nx, nz = int(x + dx + 0.5), int(z + dz + 0.5)
+        if (nx, nz) not in mz:
+            pos = nx, y, nz
 
 
 def update(dt):
