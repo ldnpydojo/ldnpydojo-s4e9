@@ -68,7 +68,7 @@ def get_dir():
 
 
 def on_draw():
-    glClearColor(0, 0, 0.2, 0)
+    glClearColor(0, 0, 0, 0)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -82,14 +82,13 @@ def on_draw():
         look_at,
         (0, 1, 0)
     ))
-    #glEnable(GL_LIGHTING)
-    glDepthMask(GL_TRUE)
-    glDepthFunc(GL_GREATER)
+    glEnable(GL_DEPTH_TEST)
+    glEnable(GL_LIGHTING)
+    glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat * 3)(5, 0.5, 5))
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, (GLfloat * 3)(1, 1, 1))
 
-    #glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat * 3)(5, 0.5, 5))
-
-    #glEnable(GL_LIGHTING)
     #glEnable(GL_LIGHT0)
+    glEnable ( GL_COLOR_MATERIAL )
     for x, z, block in itercells():
         if block == '1':
             draw_block(x, z)
