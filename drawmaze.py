@@ -48,13 +48,13 @@ def draw_block(x, z):
     br = x + 0.5, z + 0.5
     tl = x - 0.5, z - 0.5
     tr = x + 0.5, z - 0.5
-    glColor3f(1, 0, 0)
+    #glColor3f(1, 0, 0)
     draw_face(bl, br)
-    glColor3f(1, 1, 0)
+    #glColor3f(1, 1, 0)
     draw_face(br, tr)
-    glColor3f(0, 1, 0)
+    #glColor3f(0, 1, 0)
     draw_face(tr, tl)
-    glColor3f(0, 0, 1)
+    #glColor3f(0, 0, 1)
     draw_face(tl, bl)
 
 
@@ -68,7 +68,7 @@ def get_dir():
 
 
 def on_draw():
-    glClearColor(0, 0, 0, 0)
+    glClearColor(0.1, 0.05, 0, 0)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -84,11 +84,12 @@ def on_draw():
     ))
     glEnable(GL_DEPTH_TEST)
     glEnable(GL_LIGHTING)
-    glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat * 3)(5, 0.5, 5))
+    glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat * 3)(5, 0.5, 3))
     glLightfv(GL_LIGHT0, GL_DIFFUSE, (GLfloat * 3)(1, 1, 1))
 
-    #glEnable(GL_LIGHT0)
+    glEnable(GL_LIGHT0)
     glEnable ( GL_COLOR_MATERIAL )
+    glColor3f(0.6, 0.4, 0.2)
     for x, z, block in itercells():
         if block == '1':
             draw_block(x, z)
