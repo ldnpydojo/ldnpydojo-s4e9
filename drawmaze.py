@@ -23,12 +23,10 @@ def draw_face(p1, p2):
     dx = x2 - x1
     dz = z2 - z1
     glNormal3f(dz, 0, -dx)
-    glBegin(GL_QUADS)
     glVertex3f(x1, 0, z1)
     glVertex3f(x1, 1, z1)
     glVertex3f(x2, 1, z2)
     glVertex3f(x2, 0, z2)
-    glEnd()
 
 
 def draw_block(x, z):
@@ -60,7 +58,7 @@ def on_draw():
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluPerspective(70, 800 / 600.0, 0.01, 100.0)
+    gluPerspective(100, 800 / 600.0, 0.01, 100.0)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     x, y, z = pos
@@ -78,9 +76,11 @@ def on_draw():
     glEnable(GL_LIGHT0)
     glEnable ( GL_COLOR_MATERIAL )
     glColor3f(0.6, 0.4, 0.2)
+    glBegin(GL_QUADS)
     for x, z, block in itercells():
         if block == '1':
             draw_block(x, z)
+    glEnd()
 
 
 mz = set()
@@ -108,7 +108,8 @@ def on_key_press(symbol, modifiers):
 
 def update(dt):
     global ang
-    ang = ang - (ang - tang) * 0.1 ** dt
+    frac = 1e-13 ** dt
+    ang = frac * ang + (1.0 - frac) * tang
 
 
 if __name__ == '__main__':
