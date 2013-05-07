@@ -1,18 +1,6 @@
 
-
-maze = """
-1111111111
-1        1
-1 1       1
-1        1
-1        1
-1   1     1
-1        1
-1        1
-1     1   1
-1        1
-1111111111
-""".strip()
+from mazegen import generate_maze
+maze = str(generate_maze(20)).replace('#', '1')
 
 import math
 from math import sin, cos
@@ -58,7 +46,7 @@ def draw_block(x, z):
     draw_face(tl, bl)
 
 
-pos = (5, 0.5, 5)
+pos = (1, 0.5, 1)
 ang = 0
 tang = 0
 
